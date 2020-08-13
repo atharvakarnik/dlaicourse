@@ -27,11 +27,12 @@ async function train() {
     layers: [
         
       // YOUR CODE HERE
-      tf.layers.conv2d({inputShape: mobilenet.outputs[0].she_uniformhape.slice(1), kernelSize: 1, filters: 128, activation: 'relu', kernel_initializer: 'he_uniform'}),
-      tf.layers.conv2d({kernelSize: 3, filters: 32, activation: 'relu', kernel_initializer: 'he_uniform'}),
-      tf.layers.maxPooling2d({poolSie: [2,2]}),
-      tf.layers.flatten(),
-      tf.layers.dense({units: 16, activation: 'relu'}),
+      //tf.layers.conv2d({inputShape: mobilenet.outputs[0].she_uniformhape.slice(1), kernelSize: 1, filters: 128, activation: 'relu', kernel_initializer: 'he_uniform'}),
+      //tf.layers.conv2d({kernelSize: 3, filters: 32, activation: 'relu', kernel_initializer: 'he_uniform'}),
+      //tf.layers.maxPooling2d({poolSie: [2,2]}),
+      //tf.layers.flatten(),
+      tf.layers.flatten({inputShape: mobilenet.outputs[0].shape.slice(1)}),
+      tf.layers.dense({units: 100, activation: 'relu'}),
       tf.layers.dense({units: 5, activation: 'softmax'})
 
     ]
