@@ -27,18 +27,24 @@ async function train() {
     layers: [
         
       // YOUR CODE HERE
+      tf.layers.conv2d({inputShape: mobilenet.outputs[0].she_uniformhape.slice(1), kernelSize: 1, filters: 128, activation: 'relu', kernel_initializer: 'he_uniform'}),
+      tf.layers.conv2d({kernelSize: 3, filters: 32, activation: 'relu', kernel_initializer: 'he_uniform'}),
+      tf.layers.maxPooling2d({poolSie: [2,2]}),
+      tf.layers.flatten(),
+      tf.layers.dense({units: 16, activation: 'relu'}),
+      tf.layers.dense({units: 5, activation: 'softmax'})
 
     ]
   });
     
    
   // Set the optimizer to be tf.train.adam() with a learning rate of 0.0001.
-  const optimizer = // YOUR CODE HERE
+  const optimizer = tf.train.adam(0.0001); // YOUR CODE HERE
     
         
   // Compile the model using the categoricalCrossentropy loss, and
   // the optimizer you defined above.
-  model.compile(// YOUR CODE HERE);
+  model.compile({optimizer: optimizer, loss: 'categoricalCrossentropy'});// YOUR CODE HERE);
  
   let loss = 0;
   model.fit(dataset.xs, dataset.ys, {
@@ -76,7 +82,10 @@ function handleButton(elem){
         // HINT: Look at the previous cases.
             
         // YOUR CODE HERE
-		
+		case "4":
+      lizardSamples++;
+      document.getElementById("lizardsamples").innerText = "Lizard samples:" + lizardSamples;
+      break;
             
 	}
 	label = parseInt(elem.id);
@@ -112,8 +121,11 @@ async function predict() {
         // Add a case for lizard samples.
         // HINT: Look at the previous cases.
             
-        // YOUR CODE HERE 
-	
+        // YOUR CODE HERE
+    case 4:
+      predictionText = "I see Lizard";
+      break; 
+      
             
 	}
 	document.getElementById("prediction").innerText = predictionText;
